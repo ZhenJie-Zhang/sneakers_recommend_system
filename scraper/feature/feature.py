@@ -13,7 +13,7 @@ headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
 }
 
-for page in range(1, 2):
+for page in range(1, 78):
 
     print("page= ", page)
     url = "https://feature.com/collections/footwear?page=" + str(page) + "&view=ajax"
@@ -23,7 +23,7 @@ for page in range(1, 2):
     pic = pictures[0].find_all("img", class_="img-fluid")
     time.sleep(random.randint(1, 2))
 
-    for image in range(2):
+    for image in range(12):
         try:
             print("image= ", image)
             url_contain = 'https://feature.com' + pictures[image].find('a')['href']
@@ -68,5 +68,12 @@ for page in range(1, 2):
             "picture": picture_list,
             "text": text
         }
+        dn = "feature_pictures/"
+        if not os.path.exists(dn):
+            os.makedirs(dn)
+        # print(json.dumps(saved, indent=4))
+        fn = str.lower(name.replace(" ", "_").replace("/", "_").replace("\"", "").replace("\'", "").replace("_-_", "-")) + ".json"
 
-        print(json.dumps(saved, indent=4))
+        f = open(dn + fn, "w", encoding="utf-8")
+        json.dump(saved, f)
+        f.close()
