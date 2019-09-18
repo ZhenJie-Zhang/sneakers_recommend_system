@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="52d6facb-1887-4e05-82ae-ae42bfd51455" name="Default Changelist" comment="" />
+    <list default="true" id="52d6facb-1887-4e05-82ae-ae42bfd51455" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../color/defect/RemoveBackGround/color_extract.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../color/defect/RemoveBackGround/removebackground.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../amazon/amazon_modified.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../amazon/category.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../amazon/index.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../amazon/amazon.py" beforeDir="false" afterPath="$PROJECT_DIR$/../amazon/amazon.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,7 +20,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mizuno.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="503">
+            <state relative-caret-position="502">
               <caret line="78" column="41" selection-start-line="78" selection-start-column="41" selection-end-line="78" selection-end-column="41" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
@@ -75,6 +82,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -163,7 +171,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mizuno.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
+        <state relative-caret-position="502">
           <caret line="78" column="41" selection-start-line="78" selection-start-column="41" selection-end-line="78" selection-end-column="41" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
