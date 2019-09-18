@@ -50,7 +50,7 @@ while True:
                 time.sleep(random.randint(1, 3))
 
                 saved = {"鞋名": title,
-                         "價錢": price1,
+                         "價錢": price2,
                          "圖片網址": picture,
                          "超連結": wd}
                 print(saved)
