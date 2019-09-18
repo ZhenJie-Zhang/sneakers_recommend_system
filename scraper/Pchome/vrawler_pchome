@@ -1,0 +1,49 @@
+import requests, json
+
+
+url = "https://ecapi.pchome.com.tw/cdn/ecshop/prodapi/v2/store/DXAX15/prod&offset=1&limit=36&fields=Id,Nick,Pic,Price,Discount,isSpec,Name,isCarrier,isSnapUp,isBigCart,OriginPrice,iskdn,isPreOrder24h,isWarranty,isFresh&_callback=jsonp_prodlist?_callback=jsonp_prodlist"
+
+
+
+headers = {
+    "User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36",
+    "Referer" : "https://24h.pchome.com.tw/store/DXAX2W?style=2",
+    "Sec-Fetch-Mode" : "no-cors"
+}#headers:照抄他網站的
+
+response = requests.get(url, headers = headers).text
+print(response)
+response_format = response.replace("try{jsonp_prodlist(", "").replace(");}catch(e){if(window.console){console.log(e);}}", "") #把前後的鬼東西去掉
+print(response_format)
+
+shoes = json.loads(response_format)
+for i in shoes:
+    ID = i["Id"]#商品ID
+    name = i["Name"]#名稱
+    prices_all = i["Price"]
+    prices_o = prices_all['M']#原價
+    prices_w = prices_all['P']#網路價
+    pictures = "https://b.ecimg.tw/" + str(i["Pic"])[7:51]#圖片超連結
+
+
+    print("商品ID", ID)
+    print("名稱", name)
+    print("原價", prices_o)
+    print("網路價",prices_w)
+    print("圖片", pictures)
+    print()
+
+    saved = {"ID":ID,
+             "name": name,
+             "original_price":prices_o,
+             "net_price":prices_w,
+             "picture": pictures}
+
+
+    fn = "Pchome_puma/" + ID # 檔案路徑 + 檔名: 把檔案放在同目錄的Pchome_puma資料夾裡
+
+    # 儲存內文(JSON)
+    f = open(fn + ".json", "w", encoding="utf-8")
+    json.dump(saved, f)
+    f.close()
+print("這頁沒了......")
