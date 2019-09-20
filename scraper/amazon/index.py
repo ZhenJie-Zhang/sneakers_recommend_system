@@ -41,7 +41,8 @@ def get_page_meta(url):
     sleep(wait)
     response = requests.get(url, headers=headers)
     html = BeautifulSoup(response.text)
-
+    # catgories = html.find("ul", class_="a-unordered-list a-horizontal a-size-small")
+    # catgories = ">".join([c.text.strip() for c in catgories.find_all("a")])
     product = html.find_all("div", id="ppd")
     result = {}
     for i, p in enumerate(product):
@@ -50,6 +51,7 @@ def get_page_meta(url):
         images = [i["src"] for i in p.find("div", id="altImages").find_all("img")]
         feature_ls = p.find_all("ul", class_="a-unordered-list a-vertical a-spacing-none")
         feature = "".join([f.text.strip() for f in feature_ls])
+
         try:
             price = p.find("span", id="priceblock_ourprice").text.split(" - ")
         except AttributeError:
@@ -96,6 +98,7 @@ def get_page_meta(url):
         finally:
             result["ASIN"] = ASIN
             result["brand"] = brand
+            # result["catgories"] = catgories
             result["url"] = url
             result["images"] = ",".join(images)
             result["title"] = title
@@ -176,7 +179,7 @@ if __name__ == '__main__':
     # running.to_csv("running.csv", encoding="utf-8-sig", index=True, index_label="id")
 
     running = pd.read_csv("running.csv", encoding="utf-8-sig")
-    query = running["分類"] == "路跑"
+    query = running["分類"] == "田徑和越野"
     url = running[query]["連結"].item()
     print(url)
     columns = ["ASIN", "images", "title", "brand_link", "brand_pic", "brand", "star",
@@ -198,13 +201,13 @@ if __name__ == '__main__':
             print("沒有商品了", "本次抓取共", page-1, "頁，共", count, "商品")
             break
         for i, product in enumerate(products):
-            count += 1
-            link = domain + product.find("a", class_="a-link-normal")["href"]
+            link = domain + product.find("a", class_="a-link-normal a-text-normal")["href"]
             # link = "https://www.amazon.com/Reebok-CROSSFIT-Flexweave-Cross-Trainer/dp/B073X93KLW/ref=sr_1_14?pf_rd_i=16225019011&pf_rd_m=ATVPDKIKX0DER&pf_rd_p=23429fae-990f-41b5-b328-862bb645dd6a&pf_rd_r=Q0C6H7A2Y96W7JT9AXAX&pf_rd_s=merchandised-search-2&pf_rd_t=101&qid=1568863087&rnid=679286011&s=fashion-mens-intl-ship&sr=1-14"
             print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "本次第", count, "筆，第", page, "頁，第", i+1, "件，商品網址", link)
             result = get_page_meta(link)
             columns = list(result.keys())
             if result:
+                count += 1
                 df = pd.DataFrame(columns=columns)
                 data = [result[c] for c in columns]
                 s = pd.Series(data, index=columns)
@@ -215,6 +218,6 @@ if __name__ == '__main__':
                     df.to_csv(fn, mode="w", index=False, encoding='utf-8-sig')
 
             else:
-                print("沒有商品內容")
-                break
+                print("抓不到商品內容")
+                continue
         page += 1
