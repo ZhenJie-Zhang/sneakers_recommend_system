@@ -20,7 +20,6 @@ df = pd.DataFrame(columns=columns)
 
 
 scroll = 0 #selenium捲動計數
-get = 0 #取得文章數
 start = 0 #文章寫入篇數計數
 
 #selenium捲動的次數
@@ -73,6 +72,8 @@ try:
 #錯誤處理
 except AttributeError:
      print("寫入第",start,"篇時發生錯誤,略過")
+     #在第1282篇 新增寫入時( 2018/06/01 ) http://overdope.com/archives/407790
+     #發生404
 
 
 
